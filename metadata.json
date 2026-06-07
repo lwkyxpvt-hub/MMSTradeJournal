@@ -1,0 +1,6 @@
+{
+  "name": "MMS JOURNAL",
+  "description": "A modern visual trading journal focused on psychology, discipline, and performance analysis.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,106 @@
+{
+  "entities": {
+    "StrategyConfluence": {
+      "title": "StrategyConfluence",
+      "description": "MMS strategy confluence checklist values",
+      "type": "object",
+      "properties": {
+        "crh": { "type": "boolean", "description": "Candle Range High swept" },
+        "crl": { "type": "boolean", "description": "Candle Range Low swept" },
+        "pdra": { "type": "boolean", "description": "PDRA reached" },
+        "ash": { "type": "boolean", "description": "Asia Session High swept" },
+        "asl": { "type": "boolean", "description": "Asia Session Low swept" }
+      },
+      "required": ["crh", "crl", "pdra", "ash", "asl"]
+    },
+    "PreTradePsychology": {
+      "title": "PreTradePsychology",
+      "description": "Mindfulness, energy, and strategy commitment logs prior to execution",
+      "type": "object",
+      "properties": {
+        "emotionalTags": { "type": "array", "description": "Selected emotional triggers" },
+        "confidenceLevel": { "type": "integer", "description": "Self-rated confidence" },
+        "focusLevel": { "type": "integer", "description": "Self-rated focus level" },
+        "followedPlan": { "type": "boolean", "description": "Whether plan was followed" },
+        "notes": { "type": "string", "description": "Detailed journal entry context notes" }
+      },
+      "required": ["emotionalTags", "confidenceLevel", "focusLevel", "followedPlan", "notes"]
+    },
+    "PostTradeReflection": {
+      "title": "PostTradeReflection",
+      "description": "Post-operation psychological tracking and key takeaways",
+      "type": "object",
+      "properties": {
+        "emotionalTags": { "type": "array", "description": "Post-trade emotions experienced" },
+        "lessonsLearned": { "type": "string", "description": "Key takeaways and rules feedback" },
+        "wouldTakeAgain": { "type": "boolean", "description": "Retrospection conviction" }
+      },
+      "required": ["emotionalTags", "lessonsLearned", "wouldTakeAgain"]
+    },
+    "TradeCharts": {
+      "title": "TradeCharts",
+      "description": "Seed values for generated candles and screenshot data URLs",
+      "type": "object",
+      "properties": {
+        "htfSeed": { "type": "integer", "description": "HTF Seed value" },
+        "entrySeed": { "type": "integer", "description": "Entry Seed value" },
+        "exitSeed": { "type": "integer", "description": "Exit Seed value" },
+        "screenshotHtf": { "type": "string", "description": "Optional Base64/Storage URL for Higher Timeframe visual state" },
+        "screenshotEntry": { "type": "string", "description": "Optional Base64/Storage URL for Entry execution visual state" },
+        "screenshotExit": { "type": "string", "description": "Optional Base64/Storage URL for Exit execution visual" },
+        "screenshotCover": { "type": "string", "description": "Optional Base64/Storage URL for main card thumbnail visual" }
+      },
+      "required": ["htfSeed", "entrySeed", "exitSeed"]
+    },
+    "AIReview": {
+      "title": "AIReview",
+      "description": "Coaching and analysis feedback provided by AI system",
+      "type": "object",
+      "properties": {
+        "status": { "type": "string" },
+        "feedback": { "type": "string" },
+        "rating": { "type": "string" },
+        "comparisonWithPlan": { "type": "string" },
+        "coachingAdvice": { "type": "array" },
+        "timestamp": { "type": "string" }
+      },
+      "required": ["status"]
+    },
+    "Trade": {
+      "title": "Trade",
+      "description": "Core entity representing a logged trading entry in the MMS journal",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "The unique firestore ID or client UUID key" },
+        "userId": { "type": "string", "description": "The Firebase UID of the authenticated owner" },
+        "status": { "type": "string", "enum": ["OPEN", "CLOSED"], "description": "State status representing open active positions vs finalized deals" },
+        "pair": { "type": "string", "description": "Asset pair symbols, e.g. BTC/USD" },
+        "direction": { "type": "string", "enum": ["LONG", "SHORT"] },
+        "dayOfWeek": { "type": "string" },
+        "date": { "type": "string", "description": "Date of entry" },
+        "entryModel": { "type": "string" },
+        "confluence": { "$ref": "#/entities/StrategyConfluence" },
+        "timeframesUsed": { "type": "string" },
+        "entry": { "type": "number" },
+        "stopLoss": { "type": "number" },
+        "takeProfit": { "type": "number" },
+        "riskPercentage": { "type": "number" },
+        "resultPercentage": { "type": "number" },
+        "outcome": { "type": "string" },
+        "rMultiple": { "type": "number" },
+        "preTradePsychology": { "$ref": "#/entities/PreTradePsychology" },
+        "postTradeReflection": { "$ref": "#/entities/PostTradeReflection" },
+        "charts": { "$ref": "#/entities/TradeCharts" },
+        "aiReview": { "$ref": "#/entities/AIReview" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "userId", "status", "pair", "direction", "dayOfWeek", "date", "entryModel", "confluence", "timeframesUsed", "entry", "stopLoss", "takeProfit", "riskPercentage"]
+    }
+  },
+  "firestore": {
+    "/trades/{tradeId}": {
+      "schema": "#/entities/Trade",
+      "description": "User specific trades database. Secured by Firestore security policies where resource.data.userId == request.auth.uid"
+    }
+  }
+}

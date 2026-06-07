@@ -1,0 +1,32 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Global Safety Net default closed-door rule
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Trades Collection rules (secured so users can only access their own trades)
+    match /trades/{tradeId} {
+      // 1. Read access (get/list) is only allowed if the user is authenticated and is the direct owner
+      allow get: if request.auth != null && resource.data.userId == request.auth.uid;
+      allow list: if request.auth != null && resource.data.userId == request.auth.uid;
+
+      // 2. Create access requires authenticated user setting themselves as the owner with correct data formats
+      allow create: if request.auth != null 
+                    && request.resource.data.userId == request.auth.uid
+                    && request.resource.data.id == tradeId
+                    && request.resource.data.pair is string
+                    && request.resource.data.status in ['OPEN', 'CLOSED'];
+
+      // 3. Update access is authorized only if the owner id remains unchanged
+      allow update: if request.auth != null 
+                    && resource.data.userId == request.auth.uid 
+                    && request.resource.data.userId == request.auth.uid;
+
+      // 4. Delete access is authorized only for the direct owner
+      allow delete: if request.auth != null && resource.data.userId == request.auth.uid;
+    }
+  }
+}

@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* Overwrite indigo scale to use the requested brand Purple colors */
+  --color-indigo-50: #F8F6FA;
+  --color-indigo-100: #ECDFF5;
+  --color-indigo-200: #DCC5E9;
+  --color-indigo-300: #C6BBD8; /* Light Lavender Highlight */
+  --color-indigo-400: #A57AC8; /* Selected Accent Accent */
+  --color-indigo-500: #8457A8; /* Primary Purple Brand Color */
+  --color-indigo-600: #9367B6; /* Primary Button Hover */
+  --color-indigo-700: #4D2268; /* Dark Purple Branding */
+  --color-indigo-800: #39134E;
+  --color-indigo-900: #280C37;
+  --color-indigo-950: #10051B; /* Dark Purple Near-Black */
+
+  /* Override general gray colors used around the project to adapt to luxurious deep purple interface */
+  --color-gray-50: #FAFAFA;
+  --color-gray-100: #EDECF0;
+  --color-gray-200: #D8D5DF;
+  --color-gray-300: #FFFFFF; /* Primary Text: White */
+  --color-gray-400: #C6BBD8; /* Secondary Text: #C6BBD8 (Light Lavender) */
+  --color-gray-500: #8D7FA1; /* Muted Text: #8D7FA1 (Muted Purple-Grey) */
+  --color-gray-600: #4D2268;
+  --color-gray-700: #2A2035; /* Premium Border color */
+  --color-gray-800: #12121A; /* Card Surface fallback */
+  --color-gray-900: #0B0B10; /* Dark Surface */
+  --color-gray-950: #050505; /* Pure Black Background */
+
+  /* Override general slate colors to adapt as well */
+  --color-slate-100: #EDECF0;
+  --color-slate-200: #FFFFFF;
+  --color-slate-300: #C6BBD8;
+  --color-slate-400: #C6BBD8;
+  --color-slate-500: #8D7FA1;
+  --color-slate-600: #4D2268;
+  --color-slate-700: #2A2035;
+  --color-slate-800: #12121A;
+  --color-slate-900: #0B0B10;
+  --color-slate-950: #050505;
+
+  /* Override blue, cyan, and sky colors to lavender & purple scales for consistency */
+  --color-cyan-400: #C6BBD8;
+  --color-cyan-500: #8457A8;
+  --color-cyan-600: #4D2268;
+
+  --color-sky-400: #C6BBD8;
+  --color-sky-500: #8457A8;
+  --color-sky-600: #4D2268;
+
+  --color-blue-400: #C6BBD8;
+  --color-blue-500: #8457A8;
+  --color-blue-600: #4D2268;
+}
+
+/* Custom visual helper classes styled according to specified luxury color palette */
+
+/* 1. Page Background Override */
+body, .min-h-screen, .brand-bg, .bg-\[\#07070A\], .bg-\[\#0B0E14\] {
+  background-color: #050505 !important;
+}
+
+/* 2. Secondary & Dark Surfaces */
+.brand-sec-bg, .bg-\[\#171B26\], .bg-\[\#0F0F17\], .bg-\[\#11141E\] {
+  background-color: #0B0B10 !important;
+}
+
+/* 3. Premium Gradient Card Surfaces (Dark Purple to Near Black, very subtle, no excessive glow) */
+.brand-card-bg, .bg-\[\#131722\], .bg-\[\#141420\], .bg-\[\#1C2030\] {
+  background: #12121A !important;
+  background-image: linear-gradient(135deg, #180921 0%, #08060B 100%) !important;
+}
+
+/* 4. Hover states over background containers */
+.hover\:bg-\[\#1C2030\]:hover, .hover\:bg-\[\#131722\]:hover, .hover\:bg-\[\#171B26\]:hover, .hover\:bg-\[\#0F0F17\]:hover {
+  background-color: #210F31 !important;
+  background-image: none !important;
+}
+
+/* 5. Weekday Kanban board columns: subtle dark-purple tint & separation */
+.bg-\[\#131722\]\/60 {
+  background-color: rgba(77, 34, 104, 0.08) !important;
+  background-image: linear-gradient(180deg, rgba(77, 34, 104, 0.12) 0%, rgba(5, 5, 5, 0.45) 100%) !important;
+}
+
+.bg-\[\#171B26\]\/40 {
+  background-color: rgba(77, 34, 104, 0.05) !important;
+}
+
+.bg-\[\#171B26\]\/30 {
+  background-color: rgba(77, 34, 104, 0.03) !important;
+}
+
+.bg-\[\#131722\]\/80 {
+  background-color: rgba(18, 18, 26, 0.8) !important;
+}
+
+.bg-gradient-to-r.from-indigo-950.via-\[\#131722\].to-indigo-950 {
+  background-image: linear-gradient(to right, #0F0E16, #14101E, #0F0E16) !important;
+}
+
+/* 6. Premium Borders Override #2A2035 */
+.brand-border, 
+.border-\[\#2A2E39\], .border-l-\[\#2A2E39\], .border-r-\[\#2A2E39\], .border-t-\[\#2A2E39\], .border-b-\[\#2A2E39\],
+.border-\[\#24243A\], .border-l-\[\#24243A\], .border-r-\[\#24243A\], .border-t-\[\#24243A\], .border-b-\[\#24243A\],
+.border-\[\#292D3D\], .border-\[\#2A2D3D\] {
+  border-color: #2A2035 !important;
+}
+
+/* Translucent separation borders (using brand purple #8457A8 tints) */
+.border-\[\#2A2E39\]\/80, .border-\[\#24243A\]\/80 {
+  border-color: rgba(132, 87, 168, 0.18) !important;
+}
+.border-\[\#2A2E39\]\/70, .border-\[\#24243A\]\/70 {
+  border-color: rgba(132, 87, 168, 0.15) !important;
+}
+.border-\[\#2A2E39\]\/60, .border-\[\#24243A\]\/60 {
+  border-color: rgba(132, 87, 168, 0.12) !important;
+}
+.border-\[\#2A2E39\]\/50, .border-\[\#24243A\]\/50 {
+  border-color: rgba(132, 87, 168, 0.10) !important;
+}
+.border-\[\#2A2E39\]\/40, .border-\[\#24243A\]\/40 {
+  border-color: rgba(132, 87, 168, 0.08) !important;
+}
+.border-\[\#2A2E39\]\/30, .border-\[\#24243A\]\/30 {
+  border-color: rgba(132, 87, 168, 0.06) !important;
+}
+.border-l-\[\#2A2E39\]\/80, .border-l-\[\#24243A\]\/80 {
+  border-color: rgba(132, 87, 168, 0.18) !important;
+}
+
+/* 7. Typography / Text Color Custom Core Maps */
+.text-\[\#868F9F\] {
+  color: #8D7FA1 !important; /* Muted brand text color */
+}
+.text-\[\#A3A6AF\] {
+  color: #C6BBD8 !important; /* Secondary brand light lavender text */
+}
+.text-\[\#D1D4DC\] {
+  color: #FFFFFF !important; /* Primary brand white text */
+}
+.text-slate-200 {
+  color: #FFFFFF !important;
+}
+.text-slate-300 {
+  color: #C6BBD8 !important;
+}
+.text-slate-400 {
+  color: #C6BBD8 !important;
+}
+.text-slate-500 {
+  color: #8D7FA1 !important;
+}
+.text-gray-400 {
+  color: #C6BBD8 !important;
+}
+.text-gray-500 {
+  color: #8D7FA1 !important;
+}
+.text-[#868F9F] {
+  color: #8D7FA1 !important;
+}
