@@ -1,10 +1,9 @@
 {
-  "projectId": "fleet-ground-g71nt",
-  "appId": "1:1062374571232:web:8969908c0c1ca3e5fda485",
-  "apiKey": "AIzaSyCm2oJ9FBheBopHgYmUtLpRt7UuCyqp4x4",
-  "authDomain": "fleet-ground-g71nt.firebaseapp.com",
-  "firestoreDatabaseId": "ai-studio-b0d111d1-cab8-4035-a009-59ec3dc6fd97",
-  "storageBucket": "fleet-ground-g71nt.firebasestorage.app",
-  "messagingSenderId": "1062374571232",
-  "measurementId": ""
+  "projectId": "mms-journal",
+  "appId": "1:496657793061:web:cdb496a102b57f5888ffcc",
+  "apiKey": "YOUR_NEW_API_KEY",
+  "authDomain": "mms-journal.firebaseapp.com",
+  "storageBucket": "mms-journal.firebasestorage.app",
+  "messagingSenderId": "496657793061",
+  "measurementId": "G-FRWK3D7VZ3"
 }
